@@ -1,9 +1,11 @@
 package com.sunshine.co.BINI.STORE.Model;
 
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+@Entity
 public class Product {
     
     private @Id
