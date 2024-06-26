@@ -1,12 +1,12 @@
 package com.sunshine.co.BINI.STORE.Model;
 
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 public class Product {
     
     private @Id
-
     @GeneratedValue Long id;
     private String productName;
     private String description;

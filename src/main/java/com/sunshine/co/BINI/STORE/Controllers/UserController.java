@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sunshine.co.BINI.STORE.Model.UserModel;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
