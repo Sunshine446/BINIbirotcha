@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sunshine.co.BINI.STORE.Model.Product;
 import com.sunshine.co.BINI.STORE.NotFoundException.ProductNotFoundException;
 import com.sunshine.co.BINI.STORE.Repository.ProductRepository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class ProductController {
