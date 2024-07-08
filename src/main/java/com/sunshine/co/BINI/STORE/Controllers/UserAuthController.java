@@ -1,15 +1,21 @@
 package com.sunshine.co.BINI.STORE.Controllers;
 
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sunshine.co.BINI.STORE.DTO.RegistrationRequest;
+import com.sunshine.co.BINI.STORE.Model.Role;
 import com.sunshine.co.BINI.STORE.Model.UserAuth;
+import com.sunshine.co.BINI.STORE.Repository.RoleRepository;
 import com.sunshine.co.BINI.STORE.Repository.UserAuthRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -23,13 +29,13 @@ public class UserAuthController {
      RoleRepository RoleRepository;
 
      @Autowired
-     PasswordEncoder PasswordEncoder;
+     PasswordEncoder passwordEncoder;
 
      @Autowired
      AuthenticationManager authenticationManager;
 
      @PostMapping("register")
-     public ResponseEntity<?> register(@RequestBody RegistrationRequest RegistrationRequest){
+     public ResponseEntity<?> register(@RequestBody RegistrationRequest registrationRequest){
 
         //check if username exist in DB
         if(userAuthRepository.existsByUsername(registrationRequest.getUsername())){
@@ -43,7 +49,7 @@ public class UserAuthController {
         UserAuth user = new UserAuth(
             registrationRequest.getUsername(),
             registrationRequest.getEmail(),
-            PasswordEncoder.encode(registrationRequest.getPassword())
+            passwordEncoder.encode(registrationRequest.getPassword())
         );
 
         Role role = RoleRepository.findByName("ROLE_ADMIN").get();
@@ -53,4 +59,4 @@ public class UserAuthController {
         return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
      }
      
-}
+    }

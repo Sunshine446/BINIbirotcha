@@ -13,6 +13,19 @@ public class RegistrationRequest {
         this.password = password;
     }
 
+    //getters
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     //setters
     public void setUsername(String username) {
         this.username = username;
@@ -26,7 +39,8 @@ public class RegistrationRequest {
         this.password = password;
     }
 
-    //getters
+    
+    
     
 
 }
