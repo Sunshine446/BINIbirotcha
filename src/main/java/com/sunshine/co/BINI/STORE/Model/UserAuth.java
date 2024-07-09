@@ -36,6 +36,7 @@ public class UserAuth {
     private Set<Role> roles;
     
     
+    UserAuth(){}
 
 public UserAuth(String username, String email, String password) {
         this.username = username;

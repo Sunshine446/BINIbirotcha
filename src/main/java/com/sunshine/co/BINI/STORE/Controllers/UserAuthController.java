@@ -62,6 +62,31 @@ public class UserAuthController {
         userAuthRepository.save(user);
         return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
      }
+
+     @PostMapping("/register/user")
+     public ResponseEntity<?> registerUser(@RequestBody RegistrationRequest registrationRequest){
+
+        //check if username exist in DB
+        if(userAuthRepository.existsByUsername(registrationRequest.getUsername())){
+            return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
+        }
+
+        if(userAuthRepository.existsByEmail(registrationRequest.getEmail())){
+            return new ResponseEntity<>("An account is already registered in this email", HttpStatus.BAD_REQUEST);
+        }
+     
+        UserAuth user = new UserAuth(
+            registrationRequest.getUsername(),
+            registrationRequest.getEmail(),
+            passwordEncoder.encode(registrationRequest.getPassword())
+        );
+
+        Role role = RoleRepository.findByName("ROLE_USERS").get();
+        user.setRoles(Collections.singleton(role));
+
+        userAuthRepository.save(user);
+        return new ResponseEntity<>("User registered succesfully", HttpStatus.OK);
+     }
      
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
@@ -76,6 +101,7 @@ public class UserAuthController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return new ResponseEntity<>("User logged in successfully", HttpStatus.OK);
         }catch(Exception e){
+            System.err.println(e.toString());
             return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
         }   
     }

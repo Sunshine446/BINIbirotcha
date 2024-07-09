@@ -2,12 +2,10 @@ package com.sunshine.co.BINI.STORE.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,7 +37,7 @@ public class SecurityConfig {
 
         http.csrf(carf -> carf.disable())
                 .authorizeHttpRequests((authorize) ->
-                    authorize.requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
+                    authorize.requestMatchers("/api/v1/**").permitAll()
                             .requestMatchers("/api/v1/auth/**").permitAll()
                             .anyRequest().authenticated()
                 );
